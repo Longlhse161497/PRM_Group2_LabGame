@@ -6,13 +6,141 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
     <TextView
+        android:id="@+id/tvMoney"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="Your balance: 100"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <TextView
+        android:id="@+id/tvMoneyBet"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:gravity="center"
+        android:text="Bet: 10"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/tvMoney"
+        app:layout_constraintStart_toStartOf="@+id/tvMoney"
+        app:layout_constraintTop_toBottomOf="@+id/tvMoney"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <SeekBar
+        android:id="@+id/sbHorse1"
+        android:layout_width="310dp"
+        android:layout_height="25dp"
+        android:progressDrawable="@drawable/seekbar_style"
+        android:thumb="@drawable/thumb_horse1"
+        app:layout_constraintBottom_toBottomOf="@+id/cbHorse1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toEndOf="@+id/cbHorse1"
+        app:layout_constraintTop_toTopOf="@+id/cbHorse1"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <CheckBox
+        android:id="@+id/cbHorse1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.335" />
+
+    <SeekBar
+        android:id="@+id/sbHorse3"
+        android:layout_width="310dp"
+        android:layout_height="25dp"
+        android:progressDrawable="@drawable/seekbar_style"
+        android:thumb="@drawable/thumb_horse3"
+        app:layout_constraintBottom_toBottomOf="@+id/cbHorse3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toEndOf="@+id/cbHorse3"
+        app:layout_constraintTop_toTopOf="@+id/cbHorse3"
+        app:layout_constraintVertical_bias="0.478" />
+
+    <CheckBox
+        android:id="@+id/cbHorse3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbHorse2"
+        app:layout_constraintVertical_bias="0.046" />
+
+    <SeekBar
+        android:id="@+id/sbHorse2"
+        android:layout_width="310dp"
+        android:layout_height="25dp"
+        android:progressDrawable="@drawable/seekbar_style"
+        android:thumb="@drawable/thumb_horse2"
+        app:layout_constraintBottom_toBottomOf="@+id/cbHorse2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintStart_toEndOf="@+id/cbHorse2"
+        app:layout_constraintTop_toTopOf="@+id/cbHorse2"
+        app:layout_constraintVertical_bias="0.521" />
+
+    <CheckBox
+        android:id="@+id/cbHorse2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.066"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cbHorse1"
+        app:layout_constraintVertical_bias="0.034" />
+
+    <Button
+        android:id="@+id/btnStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.244"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sbHorse3"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <Button
+        android:id="@+id/btnReset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reset Horse"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.756"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sbHorse3"
+        app:layout_constraintVertical_bias="0.52" />
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Result"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sbHorse3"
+        app:layout_constraintVertical_bias="0.21" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
