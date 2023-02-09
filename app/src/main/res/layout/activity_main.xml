@@ -23,19 +23,19 @@
         app:layout_constraintVertical_bias="0.12" />
 
     <EditText
-        android:id="@+id/editTexBetAmmount"
+        android:id="@+id/etBetAmount"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="number"
-        android:hint="Bet Ammount"
         android:gravity="center"
+        android:hint="Bet Amount"
+        android:inputType="number"
+        android:textSize="25sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/tvMoney"
         app:layout_constraintStart_toStartOf="@+id/tvMoney"
         app:layout_constraintTop_toBottomOf="@+id/tvMoney"
-        app:layout_constraintVertical_bias="0.046"
-        android:textSize="25sp"/>
+        app:layout_constraintVertical_bias="0.046" />
 
     <SeekBar
         android:id="@+id/sbHorse1"

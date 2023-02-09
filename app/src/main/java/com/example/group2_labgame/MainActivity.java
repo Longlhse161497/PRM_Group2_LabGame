@@ -21,13 +21,17 @@ public class MainActivity extends AppCompatActivity {
     SeekBar sbHorse1, sbHorse2, sbHorse3;
     Button btnStart,btnReset;
     TextView tvMoney, tvResult;
-    EditText edtBetAmmount;
+    EditText edtBetAmount;
+    int balance = 100; //biến balance tổng
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mapping();
+
+        //Set balance textView
+        tvMoney.setText("Your balance: "+ balance);
 
         //cài đặt để ko thao tác đc với seekbar
         sbHorse1.setEnabled(false);
@@ -50,22 +54,39 @@ public class MainActivity extends AppCompatActivity {
                 sbHorse3.setProgress(sbHorse3.getProgress() + random.nextInt(10));
 
                 int isChosen = isChosen();
+                //lấy bet amount từ editText
+                int betAmount = Integer.parseInt(edtBetAmount.getText().toString());
+
                 if (sbHorse1.getProgress() == finish && isChosen == 1){
                     this.cancel();
                     tvResult.setText("You win");
                     btnReset.setClickable(true);
+
+                    //Cộng bet amount vào balance
+                    balance = balance + betAmount;
+                    tvMoney.setText("Your balance: "+ balance);
                 } else if (sbHorse2.getProgress() == finish && isChosen == 2){
                     this.cancel();
                     tvResult.setText("You win");
                     btnReset.setClickable(true);
+
+                    balance = balance + betAmount;
+                    tvMoney.setText("Your balance: "+ balance);
                 } else if (sbHorse3.getProgress() == finish && isChosen == 3){
                     this.cancel();
                     tvResult.setText("You win");
                     btnReset.setClickable(true);
+
+                    balance = balance + betAmount;
+                    tvMoney.setText("Your balance: "+ balance);
                 } else if ((sbHorse1.getProgress() == finish && isChosen != 1) || (sbHorse2.getProgress() == finish && isChosen != 2) || (sbHorse3.getProgress() == finish && isChosen != 3)){
                     this.cancel();
                     tvResult.setText("You lose");
                     btnReset.setClickable(true);
+
+                    //trừ bet amount ra khỏi balance
+                    balance = balance - betAmount;
+                    tvMoney.setText("Your balance: "+ balance);
                 }
             }
 
@@ -78,15 +99,38 @@ public class MainActivity extends AppCompatActivity {
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (isChosen() != 0){
-                    btnStart.setClickable(false);
-                    btnReset.setClickable(false);
-                    //khi bắt đầu chơi thì chặn thao tác với checkbox và seekbar
-                    disable();
-                    countDownTimer.start();
+                int betAmount = 0;
+                //Nếu balance=0, báo lỗi
+                if(balance > 0){
+                    //Nếu ko nhập bet amount, báo lỗi
+                    if(!edtBetAmount.getText().toString().isEmpty()){
+                        betAmount = Integer.parseInt(edtBetAmount.getText().toString());
+                        //Nếu bet amount <= 0, báo lỗi
+                        if(betAmount > 0){
+                            //Nếu bet amount lớn hơn balance, báo lỗi
+                            if(betAmount <= balance){
+                                if (isChosen() != 0){
+                                    btnStart.setClickable(false);
+                                    btnReset.setClickable(false);
+                                    //khi bắt đầu chơi thì chặn thao tác với checkbox và seekbar
+                                    disable();
+                                    countDownTimer.start();
+                                }
+                                else //nếu ko có con ngựa nào đc chọn
+                                    Toast.makeText(MainActivity.this, "Please choose a horse", Toast.LENGTH_SHORT).show();
+                            }else{
+                                edtBetAmount.setError("Bet amount cannot exceed balance");
+                            }
+                        }else{
+                            edtBetAmount.setError("Bet Amount must be larger than 0");
+                        }
+                    }else{
+                        edtBetAmount.setError("Enter a bet amount");
+                    }
+                }else{
+                    Toast.makeText(MainActivity.this, "Balance is 0, hold Reset to restart", Toast.LENGTH_SHORT).show();
+                    btnReset.setClickable(true);
                 }
-                else //nếu ko có con ngựa nào đc chọn
-                    Toast.makeText(MainActivity.this, "Please choose a horse", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -108,6 +152,33 @@ public class MainActivity extends AppCompatActivity {
                 //bật nút start và tắt nút reset
                 btnStart.setClickable(true);
                 btnReset.setClickable(false);
+            }
+        });
+
+        //Giữ reset để restart game
+        btnReset.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                //reset lại balance và editBetAmount
+                balance = 100;
+                tvMoney.setText("Your balance: " + balance);
+                edtBetAmount.setText("");
+
+                sbHorse1.setProgress(0);
+                sbHorse2.setProgress(0);
+                sbHorse3.setProgress(0);
+                tvResult.setText("");
+                cbHorse1.setChecked(false);
+                cbHorse2.setChecked(false);
+                cbHorse3.setChecked(false);
+
+                enable();
+
+                btnStart.setClickable(true);
+                btnReset.setClickable(false);
+
+                Toast.makeText(MainActivity.this, "Game has been restarted", Toast.LENGTH_SHORT).show();
+                return false;
             }
         });
 
@@ -154,6 +225,8 @@ public class MainActivity extends AppCompatActivity {
         btnStart = (Button) findViewById(R.id.btnStart);
         btnReset = (Button) findViewById(R.id.btnReset);
         tvResult = (TextView) findViewById(R.id.tvResult);
+        tvMoney = (TextView) findViewById(R.id.tvMoney);
+        edtBetAmount = (EditText) findViewById(R.id.etBetAmount);
     }
 
     //hàm trả về lựa chọn
