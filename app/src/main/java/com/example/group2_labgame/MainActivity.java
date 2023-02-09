@@ -7,6 +7,8 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,7 +20,8 @@ public class MainActivity extends AppCompatActivity {
     CheckBox cbHorse1, cbHorse2, cbHorse3;
     SeekBar sbHorse1, sbHorse2, sbHorse3;
     Button btnStart,btnReset;
-    TextView tvResult;
+    TextView tvMoney, tvResult;
+    EditText edtBetAmmount;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,9 +37,10 @@ public class MainActivity extends AppCompatActivity {
         //tắt nút reset trước khi bắt đầu
         btnReset.setClickable(false);
 
-        final CountDownTimer countDownTimer = new CountDownTimer(12000, 300) {
+        final CountDownTimer countDownTimer = new CountDownTimer(10000, 200) {
             @Override
             public void onTick(long millisUntilFinished) {
+                sbHorse1.setMax(100);
                 int finish = sbHorse1.getMax();
 
                 //thuật toán chính của chương trình
@@ -46,19 +50,19 @@ public class MainActivity extends AppCompatActivity {
                 sbHorse3.setProgress(sbHorse3.getProgress() + random.nextInt(10));
 
                 int isChosen = isChosen();
-                if (sbHorse1.getProgress() >= finish && isChosen == 1){
+                if (sbHorse1.getProgress() == finish && isChosen == 1){
                     this.cancel();
                     tvResult.setText("You win");
                     btnReset.setClickable(true);
-                } else if (sbHorse2.getProgress() >= finish && isChosen == 2){
+                } else if (sbHorse2.getProgress() == finish && isChosen == 2){
                     this.cancel();
                     tvResult.setText("You win");
                     btnReset.setClickable(true);
-                } else if (sbHorse3.getProgress() >= finish && isChosen == 3){
+                } else if (sbHorse3.getProgress() == finish && isChosen == 3){
                     this.cancel();
                     tvResult.setText("You win");
                     btnReset.setClickable(true);
-                } else if ((sbHorse1.getProgress() >= finish && isChosen != 1) || (sbHorse2.getProgress() >= finish && isChosen != 2) || (sbHorse3.getProgress() >= finish && isChosen != 3)){
+                } else if ((sbHorse1.getProgress() == finish && isChosen != 1) || (sbHorse2.getProgress() == finish && isChosen != 2) || (sbHorse3.getProgress() == finish && isChosen != 3)){
                     this.cancel();
                     tvResult.setText("You lose");
                     btnReset.setClickable(true);
@@ -104,6 +108,37 @@ public class MainActivity extends AppCompatActivity {
                 //bật nút start và tắt nút reset
                 btnStart.setClickable(true);
                 btnReset.setClickable(false);
+            }
+        });
+
+        //hàm nếu chọn checkbox này thì hủy chọn 2 checkbox còn lại
+        cbHorse1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    cbHorse2.setChecked(false);
+                    cbHorse3.setChecked(false);
+                }
+            }
+        });
+
+        cbHorse2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    cbHorse1.setChecked(false);
+                    cbHorse3.setChecked(false);
+                }
+            }
+        });
+
+        cbHorse3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    cbHorse1.setChecked(false);
+                    cbHorse2.setChecked(false);
+                }
             }
         });
     }
