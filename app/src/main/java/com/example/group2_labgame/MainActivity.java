@@ -2,6 +2,7 @@ package com.example.group2_labgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.View;
@@ -20,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     CheckBox cbHorse1, cbHorse2, cbHorse3;
     SeekBar sbHorse1, sbHorse2, sbHorse3;
     Button btnStart,btnReset;
-    TextView tvMoney, tvResult;
+    TextView tvMoney, tvResult, tvHowtoPlay;
     EditText edtBetAmount;
     int balance = 100; //biến balance tổng
 
@@ -212,6 +213,15 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        tvHowtoPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Guide.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     //hàm ánh xạ
@@ -226,6 +236,7 @@ public class MainActivity extends AppCompatActivity {
         btnReset = (Button) findViewById(R.id.btnReset);
         tvResult = (TextView) findViewById(R.id.tvResult);
         tvMoney = (TextView) findViewById(R.id.tvMoney);
+        tvHowtoPlay = (TextView) findViewById(R.id.howToPlay);
         edtBetAmount = (EditText) findViewById(R.id.etBetAmount);
     }
 

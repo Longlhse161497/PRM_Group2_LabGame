@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/guide"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:lineSpacingExtra="4sp"
+        android:text="Chào mừng tới trò chơi đua ngựa!!!
+            Mỗi khi bắt đầu trò chơi bạn sẽ được cấp 100 điểm.
+Bạn sẽ nhập mức điểm bạn muốn chơi vào ô Bet amount và chọn con ngựa mà bạn tin sẽ chiến thắng.
+Sau đó bạn hãy ấn nút bắt đầu để các con ngựa chạy đua.
+Nếu con ngựa bạn chọn thắng, bạn sẽ được cộng số điểm tương đương với số điểm bạn đã cược, khi thua cũng vậy.
+Sau khi chơi xong, hãy nhấn nút Reset để chơi tiếp ván tiếp theo. Bạn sẽ chơi cho tới khi nào số điểm còn lại là 0 thì bạn sẽ phải bắt đầu lại trò chơi từ đầu.
+Để làm được điều đó, hãy nhấn giữ nút Reset.
+                                                    Chúc bạn chơi vui vẻ!!!"
+        android:textColor="#000"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.388" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="back to game"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/guide"
+        app:layout_constraintHorizontal_bias="0.527"
+        app:layout_constraintStart_toStartOf="@+id/guide"
+        app:layout_constraintTop_toBottomOf="@+id/guide"
+        app:layout_constraintVertical_bias="0.0" />
+</androidx.constraintlayout.widget.ConstraintLayout>
